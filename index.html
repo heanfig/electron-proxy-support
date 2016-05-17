@@ -12,16 +12,27 @@
     and Electron <script>document.write(process.versions.electron)</script>.
   </body>
   <h1>IFRAME</h1>
-  <webview src="http://suppler.co/useragent.php" useragent="Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko"></webview>
+  <!--<webview src="http://suppler.co/useragent.php" useragent="Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko"></webview>-->
+  <webview id="mywv" useragent="Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko" src="http://www.suppler.co/useragent.php" httpReferrer="http://redtube.com"></webview>
+  <input type="button" value="changeURL" onclick="changeURL()"></input>
   <script>
     // You can also require other files to run in this process
-
+    // https://github.com/electron/electron/issues/766
+    // https://github.com/electron/electron/issues/2445
+    //https://github.com/electron/electron/blob/master/docs/api/protocol.md
     const {BrowserWindow} = require('electron').remote;
 
     // Or in the renderer process.
-    let win = new BrowserWindow({width: 800, height: 600, show: false});
-    win.loadURL('http://suppler.co/useragent.php',{ userAgent: "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"});
-    win.show();
+    /*let win = new BrowserWindow({width: 800, height: 600, show: false});
+    win.loadURL('http://www.whatismyreferer.com/',{ userAgent: "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36",
+    });
+    win.show();*/
+
+    function changeURL(){
+      var mwv = document.getElementById("mywv");
+      mwv.httpReferrer = "http://google.com";
+      mwv.src = "https://www.whatismyreferer.com";
+    }
 
     //require('./renderer.js');
   </script>
