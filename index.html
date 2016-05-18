@@ -5,16 +5,28 @@
     <title>Hello World!</title>
   </head>
   <body>
+
+    <input id="qURL" placeholder="escriba URL">
+    <input id="httpRefferer" placeholder="Escriba URL REFERRER">
+    <input id="uaValue" placeholder="userAgent" value="Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36">
+
+    <input type="button" value="Go to page" onclick="GO()">
+      <style type="text/css">
+          webview#mywv {
+          height: 501px;
+      }
+    </style>
+    
+    <webview id="mywv" useragent="Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko" src="http://www.suppler.co/useragent.php" httpReferrer="http://redtube.com"></webview>
+  
+    <!--
     <h1>Hello World!</h1>
-    <!-- All of the Node.js APIs are available in this renderer process. -->
     We are using node <script>document.write(process.versions.node)</script>,
     Chromium <script>document.write(process.versions.chrome)</script>,
     and Electron <script>document.write(process.versions.electron)</script>.
+    -->
   </body>
-  <h1>IFRAME</h1>
-  <!--<webview src="http://suppler.co/useragent.php" useragent="Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko"></webview>-->
-  <webview id="mywv" useragent="Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko" src="http://www.suppler.co/useragent.php" httpReferrer="http://redtube.com"></webview>
-  <input type="button" value="changeURL" onclick="changeURL()"></input>
+  
   <script>
     // You can also require other files to run in this process
     // https://github.com/electron/electron/issues/766
@@ -28,11 +40,19 @@
     });
     win.show();*/
 
-    function changeURL(){
-      var mwv = document.getElementById("mywv");
-      mwv.httpReferrer = "http://google.com";
-      mwv.src = "https://www.whatismyreferer.com";
-    }
+    function GO(){
+      
+      var qURL = document.getElementById("qURL").value;
+      var httpRefferer = document.getElementById("httpRefferer").value;
+      var uaValue = document.getElementById("uaValue").value;
+        
+        var mwv = document.getElementById("mywv");
+        mwv.loadURL(qURL,{ 
+            userAgent: uaValue,
+            httpReferrer: httpRefferer
+        });
+
+      }
 
     //require('./renderer.js');
   </script>
