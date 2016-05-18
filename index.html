@@ -50,7 +50,8 @@
         var mwv = document.getElementById("mywv");
         mwv.loadURL(qURL,{ 
             userAgent: uaValue,
-            httpReferrer: httpRefferer
+            httpReferrer: httpRefferer,
+            extraHeaders: "platform: Linux x86_64\nvendor: Google Jerman."
         });
 
       }
