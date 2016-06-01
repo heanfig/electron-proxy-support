@@ -6,15 +6,17 @@
   </head>
   <body>
 
-    <input id="httpRefferer" placeholder="Escriba URL REFERRER">
-    <input id="uaValue" placeholder="userAgent" value="Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36">
-
+  
       <style type="text/css">
         webview#mywv {
             height: 501px;
         }
         #qURLContainer{
             padding: 10px
+        }
+        p.ttitle {
+            font-weight: bold;
+            margin: 0;
         }
     </style>
     
@@ -25,12 +27,48 @@
       <div class="row">
         <div class="col-lg-12" id="qURLContainer">
           <div class="input-group custom-search-form">
-            <input type="text" class="form-control" placeholder="escriba URL" id="qURL">
+            
+            <p class="ttitle">URL Refferer </p>
+              <input id="httpRefferer" class="form-control" placeholder="Escriba URL REFERRER">
+            <p class="ttitle">URL </p>
+              <input type="text" class="form-control" placeholder="escriba URL" id="qURL">
+            <p class="ttitle">appname </p>
+              <input type="text" class="form-control" value="Netscape" placeholder="appname" id="appname">
+            <p class="ttitle">appVersion </p>
+              <input type="text" class="form-control" value="5.0 (Windows NT 6.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.41 Safari/537.36" placeholder="appVersion" id="appVersion">
+            <p class="ttitle">platform </p>
+              <input type="text" class="form-control" value="Win32" placeholder="platform" id="platform">
+            <p class="ttitle">appCodeName </p>
+              <input type="text" class="form-control" value="Mozilla" placeholder="appCodeName" id="appCodeName">
+            <p class="ttitle">product </p>
+              <input type="text" class="form-control" value="Gecko" placeholder="product" id="product">
+            <p class="ttitle">productSub </p>
+              <input type="text" class="form-control" value="20030107" placeholder="productSub" id="productSub">
+            <p class="ttitle">language </p>
+              <input type="text" class="form-control" value="en-US" placeholder="language" id="language">
+            <p class="ttitle">User Agent </p>
+            <input id="uaValue" class="form-control" placeholder="userAgent" value="Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36">
+            <p class="ttitle">vendor </p>
+              <input type="text" class="form-control" value="Google Inc." placeholder="vendor" id="vendor">
+            <p class="ttitle">width </p>
+              <input type="text" class="form-control" value="1280" placeholder="width" id="width">
+            <p class="ttitle">height </p>
+              <input type="text" class="form-control" value="1024" placeholder="height" id="height">
+            <p class="ttitle">innerWidth </p>
+              <input type="text" class="form-control" value="0" placeholder="innerWidth" id="innerWidth">
+            <p class="ttitle">innerHeight </p>
+              <input type="text" class="form-control" value="0" placeholder="innerHeight" id="innerHeight">
+            <p class="ttitle">offsetWidth </p>
+              <input type="text" class="form-control" value="0" placeholder="offsetWidth" id="offsetWidth">
+            <p class="ttitle">offsetHeight </p>
+              <input type="text" class="form-control" value="442" placeholder="offsetHeight" id="offsetHeight">
+
             <span class="input-group-btn">
               <button class="btn btn-default" type="button" onclick="GO()">
                   <span class="glyphicon glyphicon-search"></span>
               </button>
             </span>
+
            </div>
         </div>
       </div>
@@ -63,14 +101,43 @@
       
       var qURL = document.getElementById("qURL").value;
       var httpRefferer = document.getElementById("httpRefferer").value;
+      
+
+      var appname = document.getElementById("appname").value;
+      var appVersion = document.getElementById("appVersion").value;
+      var platform = document.getElementById("platform").value;
+      var appCodeName = document.getElementById("appCodeName").value;
+      var product = document.getElementById("product").value;
+      var productSub = document.getElementById("productSub").value;
+      var language = document.getElementById("language").value;
       var uaValue = document.getElementById("uaValue").value;
+      var vendor = document.getElementById("vendor").value;
+      var width = document.getElementById("width").value;
+      var height = document.getElementById("height").value;
+      var innerWidth = document.getElementById("innerWidth").value;
+      var innerHeight = document.getElementById("innerHeight").value;
+      var offsetWidth = document.getElementById("offsetWidth").value;
+      var offsetHeight = document.getElementById("offsetHeight").value;
         
         //@reference: https://github.com/electron/electron/blob/master/docs/api/web-view-tag.md
         var mwv = document.getElementById("mywv");
         mwv.loadURL(qURL,{ 
             userAgent: uaValue,
             httpReferrer: httpRefferer,
-            extraHeaders: "platform: Linux x86_64\nvendor: Google Jerman."
+            extraHeaders: 
+            "appname: " + appname + "\n" +
+            "appVersion: " + appVersion + "\n" +
+            "platform: " + platform + "\n" +
+            "appCodeName: " + appCodeName + "\n" +
+            "product: " + product + "\n" +
+            "productSub: " + productSub + "\n" +
+            "language: " + language + "\n" +
+            "width: " + width + "\n" +
+            "height: " + height + "\n" +
+            "innerWidth: " + innerWidth + "\n" +
+            "innerHeight: " + innerHeight + "\n" +
+            "offsetWidth: " + offsetWidth + "\n" +
+            "offsetHeight: " + offsetHeight
         });
 
       }
