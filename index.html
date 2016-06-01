@@ -10,6 +10,9 @@
       <style type="text/css">
         webview#mywv {
             height: 501px;
+            border: 1px solid red;
+            margin: 38px;
+            background: white;
         }
         #qURLContainer{
             padding: 10px
@@ -17,6 +20,9 @@
         p.ttitle {
             font-weight: bold;
             margin: 0;
+        }
+        body{
+            background: gray !important;
         }
     </style>
     
@@ -29,9 +35,9 @@
           <div class="input-group custom-search-form">
             
             <p class="ttitle">URL Refferer </p>
-              <input id="httpRefferer" class="form-control" placeholder="Escriba URL REFERRER">
+              <input id="httpRefferer" class="form-control" value="http://facebook.com" placeholder="Escriba URL REFERRER">
             <p class="ttitle">URL </p>
-              <input type="text" class="form-control" placeholder="escriba URL" id="qURL">
+              <input type="text" class="form-control" value="http://suppler.co/useragent.php" placeholder="escriba URL" id="qURL">
             <p class="ttitle">appname </p>
               <input type="text" class="form-control" value="Netscape" placeholder="appname" id="appname">
             <p class="ttitle">appVersion </p>
@@ -120,6 +126,7 @@
       var offsetHeight = document.getElementById("offsetHeight").value;
         
         //@reference: https://github.com/electron/electron/blob/master/docs/api/web-view-tag.md
+
         var mwv = document.getElementById("mywv");
         mwv.loadURL(qURL,{ 
             userAgent: uaValue,
@@ -139,6 +146,30 @@
             "offsetWidth: " + offsetWidth + "\n" +
             "offsetHeight: " + offsetHeight
         });
+        mwv.executeJavaScript(
+          `window.navigator.__defineGetter__('appName', function() {return "${ appname }";});`
+        );
+        mwv.executeJavaScript(
+          `window.navigator.__defineGetter__('appVersion', function() {return "${ appVersion }";});`
+        );
+        mwv.executeJavaScript(
+          `window.navigator.__defineGetter__('appCodeName', function() {return "${ appCodeName }";});`
+        );
+        mwv.executeJavaScript(
+          `window.navigator.__defineGetter__('platform', function() {return "${ platform }";});`
+        );
+        mwv.executeJavaScript(
+          `window.navigator.__defineGetter__('product', function() {return "${ product }";});`
+        );
+        mwv.executeJavaScript(
+          `window.navigator.__defineGetter__('productSub', function() {return "${ productSub }";});`
+        );
+        mwv.executeJavaScript(
+          `window.navigator.__defineGetter__('language', function() {return "${ language }";});`
+        );
+        mwv.executeJavaScript(
+          `window.navigator.__defineGetter__('vendor', function() {return "${ vendor }";});`
+        );
 
       }
 
